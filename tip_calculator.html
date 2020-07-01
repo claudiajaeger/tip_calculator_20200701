@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+</head>
+<body>
+ <!--   title -->
+    <div class="row">
+        <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Tip Calculator</h1>
+        <br/>
+    </div>
+<!--  bill amount -->
+    <div class="form-group row">
+        <h4 style="display:inline-block; font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            Bill Amount (in dollars):</h4> 
+
+        <input type="number" id="billAmount" placeholder="ex: 25.99" class="form-control" style="padding:10px; width:400px;
+        font-size:12px; color:black; border:1px solid mediumaquamarine;">
+        <br/>
+    </div>
+<!--    tip amount -->
+    <div class="form-group row mt-4">
+
+        <h4 style="display:inline-block; font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            Tip Amount (in %):</h4> 
+
+        <input type="number" id="tipAmount" placeholder="ex: 9.75" class="form-control" style="padding:10px; margin: 34px; width:400px;
+        font-size:12px; color:black; border:1px solid mediumaquamarine;">
+        <br/>
+
+    </div>
+
+ <!--   total amount button -->
+    <div class="form-group row">
+    <button class="btn btn-primary" style="background-color: lightblue; color:black; border: 1px solid white; font-size:15px; 
+    font-family: 'Franklin Gothic Medium'; padding: 10px;" onClick="calculate()">
+        Calculate Tip and Total Bill
+    </button>
+    </div>
+    <br/>
+
+<!-- Results field -->
+    <div class="form-group row">
+        <div class="tip-amount" style="font-family:Franklin Gothic Medium;"></div>
+        <div class="total-with-tip" style="font-family:Franklin Gothic Medium;"></div>
+
+    </div>
+
+    <script>
+       //calls the onClick-event with calculate function
+        function calculate() {
+            //console.log("clicked")
+            // gets the bill and tip-elements from the id's in the div
+            var billAmount = Number(document.getElementById("billAmount").value)
+            var tipAmount = Number(document.getElementById("tipAmount").value)
+
+            // turns the tip-number into a decimal
+            //console.log(billAmount, tipAmount)
+            tipAmount = tipAmount / 100; // for example 9 turns into 0.09
+
+            //calculation of total tip and then picks up the div elements with Query
+            var totalTip = billAmount * tipAmount;
+            var tipHtmlCode = "<h3>Total tip: <small>$" + totalTip.toFixed(2) + "</small></h3>";
+            document.querySelector(".tip-amount").innerHTML = tipHtmlCode;
+
+            //calculation of total bill with tip and then picks up the div elements with Query
+            var totalBillAmount = totalTip + billAmount;
+            var billHtmlCode = "<h3>Total bill with tip: <small>$" + totalBillAmount.toFixed(2) + "</small></h3>";
+            document.querySelector(".total-with-tip").innerHTML = billHtmlCode; 
+
+            return [totalTip.toFixed(2), totalBillAmount.toFixed(2)]
+
+
+        }
+
+    </script>
+    
+</body>
+</html>
